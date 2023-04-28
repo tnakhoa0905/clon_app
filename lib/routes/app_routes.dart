@@ -6,7 +6,7 @@ import 'package:clon_app/screens/prolife/prolife_options/notification_screen.dar
 import 'package:clon_app/screens/prolife/prolife_options/payment_history_screen.dart';
 import 'package:clon_app/screens/prolife/prolife_options/tien_linh_thach_screen.dart';
 import 'package:clon_app/screens/prolife/prolife_options/tui_can_khon_screen.dart';
-import 'package:clon_app/screens/store/store_screen.dart';
+
 import 'package:flutter/material.dart';
 
 import '../models/argument/sort_comic_argument.dart';

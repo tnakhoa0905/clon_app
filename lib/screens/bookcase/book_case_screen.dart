@@ -32,7 +32,7 @@ class _BookCaseScreen extends State<BookCaseScreen>
       children: [
         Container(
           height: MediaQuery.of(context).size.height * 2 / 30,
-          // padding: EdgeInsets.fromLTRB(8, 4, 8, 4),
+          padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
           decoration: BoxDecoration(color: Colors.blue[800]),
           child: TabBar(
               indicatorColor: Colors.white,

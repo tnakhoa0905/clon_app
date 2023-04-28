@@ -28,10 +28,7 @@ class _SortComicScreenState extends State<SortComicScreen> {
   @override
   Widget build(BuildContext context) {
     print(widget.sort);
-    const List<String> fruits = ['Apple', 'Banana', 'Orange'];
-    final List<bool> _selectedFruits = <bool>[true, false, false];
-    final List<bool> _selectedVegetables = <bool>[false, true, false];
-    final List<bool> _selectedWeather = <bool>[false, false, true];
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -103,6 +100,17 @@ class _SortComicScreenState extends State<SortComicScreen> {
                           context: context,
                           isScrollControlled: true,
                           builder: (builder) {
+                            const List<String> status = [
+                              'Tất cả',
+                              'Đang ra',
+                              'Hoành thành'
+                            ];
+                            final List<bool> _selectedStatus = <bool>[
+                              true,
+                              false,
+                              false
+                            ];
+                            widget.sort?.status = 'Tất cả';
                             _listGenre.clear();
                             List<Genre> listGenre = [
                               Genre(title: "Action", isChecked: false),
@@ -150,53 +158,136 @@ class _SortComicScreenState extends State<SortComicScreen> {
                                             ),
                                             Row(
                                               children: [
-                                                Text('Trạng thái:'),
+                                                const Text('Trạng thái:'),
                                                 ToggleButtons(
-                                                  direction: Axis.horizontal,
+                                                  color: Colors.grey,
+                                                  fillColor: Colors.white,
+                                                  renderBorder: false,
+                                                  selectedColor: Colors.black,
                                                   onPressed: (int index) {
                                                     setState(() {
-                                                      // The button that is tapped is set to true, and the others to false.
                                                       for (int i = 0;
                                                           i <
-                                                              _selectedFruits
+                                                              _selectedStatus
                                                                   .length;
                                                           i++) {
-                                                        _selectedFruits[i] =
+                                                        _selectedStatus[i] =
                                                             i == index;
                                                       }
-                                                      widget.sort?.status =
-                                                          fruits[index];
+                                                      // widget.sort?.status =
+                                                      //     fruits[index];
                                                     });
                                                   },
-                                                  borderRadius:
-                                                      const BorderRadius.all(
-                                                          Radius.circular(8)),
-                                                  selectedBorderColor:
-                                                      Colors.blue[800],
-                                                  selectedColor: Colors.white,
-                                                  fillColor: Colors.red[200],
-                                                  color: Colors.red[400],
-                                                  constraints:
-                                                      const BoxConstraints(
-                                                    minHeight: 40.0,
-                                                    minWidth: 80.0,
-                                                  ),
-                                                  isSelected: _selectedFruits,
-                                                  renderBorder: false,
+                                                  isSelected: _selectedStatus,
                                                   children: [
-                                                    for (var item in fruits)
-                                                      Text(item),
+                                                    for (int i = 0;
+                                                        i < status.length;
+                                                        i++)
+                                                      Container(
+                                                        color: _selectedStatus[
+                                                                    i] ==
+                                                                false
+                                                            ? Colors.grey[200]
+                                                            : Colors.blue[800],
+                                                        margin:
+                                                            EdgeInsets.all(4.0),
+                                                        child: Text(status[i]),
+                                                      ),
                                                   ],
                                                 ),
+                                                // ElevatedButton(
+                                                //   onPressed: () {},
+                                                //   style:
+                                                //       ElevatedButton.styleFrom(
+                                                //     shape:
+                                                //         RoundedRectangleBorder(
+                                                //       borderRadius:
+                                                //           BorderRadius.circular(
+                                                //               0),
+                                                //     ),
+                                                //   ),
+                                                //   child: const Text("Tất cả"),
+                                                // ),
+                                                // ElevatedButton(
+                                                //   onPressed: () {},
+                                                //   style:
+                                                //       ElevatedButton.styleFrom(
+                                                //     shape:
+                                                //         RoundedRectangleBorder(
+                                                //       borderRadius:
+                                                //           BorderRadius.circular(
+                                                //               0),
+                                                //     ),
+                                                //   ),
+                                                //   child: const Text("Đang ra"),
+                                                // ),
+                                                // ElevatedButton(
+                                                //   onPressed: () {},
+                                                //   style:
+                                                //       ElevatedButton.styleFrom(
+                                                //     backgroundColor:
+                                                //         Colors.grey[100],
+                                                //     shape:
+                                                //         RoundedRectangleBorder(
+                                                //       borderRadius:
+                                                //           BorderRadius.circular(
+                                                //               0),
+                                                //     ),
+                                                //   ),
+                                                //   child: const Text(
+                                                //     "Hoàn thành",
+                                                //     style: TextStyle(
+                                                //         color: Colors.black),
+                                                //   ),
+                                                // ),
+
+                                                // ToggleButtons(
+                                                //   direction: Axis.horizontal,
+                                                //   onPressed: (int index) {
+                                                //     setState(() {
+                                                //       // The button that is tapped is set to true, and the others to false.
+                                                //   for (int i = 0;
+                                                //       i <
+                                                //           _selectedFruits
+                                                //               .length;
+                                                //       i++) {
+                                                //     _selectedFruits[i] =
+                                                //         i == index;
+                                                //   }
+                                                //   widget.sort?.status =
+                                                //       fruits[index];
+                                                // });
+                                                //   },
+                                                //   disabledColor: Color.fromARGB(
+                                                //       255, 110, 11, 11),
+                                                //   disabledBorderColor:
+                                                //       Colors.grey,
+                                                //   selectedBorderColor:
+                                                //       Colors.blue[800],
+                                                //   selectedColor: Colors.white,
+                                                //   fillColor: Colors.blue[800],
+                                                //   color: Colors.white,
+                                                //   constraints:
+                                                //       const BoxConstraints(
+                                                //     minHeight: 40.0,
+                                                //     minWidth: 80.0,
+                                                //   ),
+                                                //   isSelected: _selectedFruits,
+                                                //   renderBorder: false,
+                                                // children: [
+                                                // for (var item in fruits)
+                                                //   Text(item),
+                                                // ],
+                                                // ),
                                               ],
                                             ),
-                                            Row(
-                                              children: [
-                                                Text('Xếp theo:'),
-                                                for (var item in fruits)
-                                                  Text(item)
-                                              ],
-                                            ),
+                                            // Row(
+                                            //   children: [
+                                            //     Text('Xếp theo:'),
+                                            //     for (var item in fruits)
+                                            //       Text(item)
+                                            //   ],
+                                            // ),
                                             Text('Thể loại'),
                                             GridView.builder(
                                               physics:
