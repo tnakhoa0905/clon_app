@@ -30,7 +30,7 @@ class _WorldScreen extends State<WorldScreen> with TickerProviderStateMixin {
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.fromLTRB(8, 4, 8, 4),
+          padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
           height: MediaQuery.of(context).size.height * 2 / 30,
           decoration: BoxDecoration(color: Colors.blue[800]),
           child: TabBar(
@@ -63,10 +63,10 @@ class _WorldScreen extends State<WorldScreen> with TickerProviderStateMixin {
         Expanded(
           child: TabBarView(controller: _controller, children: [
             Container(
-                padding: EdgeInsets.all(8),
-                child: Text('Hiện không có video nào.')),
-            WorldDetail(itemBuilder: CommentItem()),
-            WorldDetail(itemBuilder: ReviewItem())
+                padding: const EdgeInsets.all(8),
+                child: const Text('Hiện không có video nào.')),
+            WorldDetail(itemBuilder: const CommentItem()),
+            WorldDetail(itemBuilder: const ReviewItem())
           ]),
         )
       ],

@@ -41,6 +41,9 @@ dependencies:
   url_launcher: ^6.1.10
   expandable: ^5.0.1
   persistent_bottom_nav_bar: ^5.0.2
+  firebase_core: ^2.10.0
+  firebase_database: ^10.1.1
+  flutter_bloc: ^8.1.2
   
 
 dev_dependencies:

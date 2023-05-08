@@ -1,4 +1,7 @@
+import 'package:clon_app/blocs/manga_bloc.dart';
+import 'package:clon_app/models/manga.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'bookcase/book_case_screen.dart';
 import 'comic/comic_screen.dart';
@@ -44,123 +47,117 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        // bottomNavigationBar: _buildBottomNavigationBar(context),
-        // body: PageView(
-        //   controller: _pageViewController,
-        //   children: screens,
-        //   onPageChanged: (value) {
-        //     setState(() {
-        //       _currentIndex = value;
-        //     });
-        //   },
-        body: Column(
-          children: [
-            Expanded(
-              child: TabBarView(controller: _controller, children: screens),
-            ),
-            Container(
-              height: MediaQuery.of(context).size.height * 2 / 30,
-              decoration: BoxDecoration(color: Colors.blue[800]),
-              child: TabBar(
-                  labelPadding: EdgeInsets.all(0),
-                  isScrollable: false,
-                  indicatorColor: Colors.white,
-                  labelColor: Colors.white,
-                  controller: _controller,
-                  tabs: [
-                    Tab(
-                      iconMargin: EdgeInsets.zero,
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
-                          children: const [
-                            Icon(
-                              Icons.replay_circle_filled_rounded,
-                              // size: 14,
-                            ),
-                            SizedBox(
-                              width: 2,
-                            ),
-                            Text(
-                              'Tủ sách',
-                              style: TextStyle(fontSize: 11),
-                            )
-                          ]),
-                    ),
-                    Tab(
-                      iconMargin: EdgeInsets.zero,
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            Icon(
-                              Icons.bookmark,
-                              // size: 14,
-                            ),
-                            SizedBox(
-                              width: 2,
-                            ),
-                            Text(
-                              'Truyện tranh',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 11),
-                            )
-                          ]),
-                    ),
-                    Tab(
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            Icon(
-                              Icons.download,
-                              // size: 14,
-                            ),
-                            SizedBox(
-                              width: 2,
-                            ),
-                            Text(
-                              'Cửa hàng',
-                              style: TextStyle(fontSize: 11),
-                            )
-                          ]),
-                    ),
-                    Tab(
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            Icon(
-                              Icons.download,
-                              // size: 14,
-                            ),
-                            SizedBox(
-                              width: 2,
-                            ),
-                            Text(
-                              'Thế giới',
-                              style: TextStyle(fontSize: 11),
-                            )
-                          ]),
-                    ),
-                    Tab(
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            Icon(
-                              Icons.download,
-                              // size: 14,
-                            ),
-                            SizedBox(
-                              width: 2,
-                            ),
-                            Text(
-                              'Tôi',
-                              style: TextStyle(fontSize: 11),
-                            )
-                          ]),
-                    )
-                  ]),
-            ),
-          ],
-        ),
+        body: BlocBuilder<MangaBloc, List<Manga>>(
+            builder: (context, List<Manga> list) {
+          return Column(
+            children: [
+              Expanded(
+                child: TabBarView(controller: _controller, children: screens),
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height * 2 / 30,
+                decoration: BoxDecoration(color: Colors.blue[800]),
+                child: TabBar(
+                    labelPadding: EdgeInsets.all(0),
+                    isScrollable: false,
+                    indicatorColor: Colors.white,
+                    labelColor: Colors.white,
+                    controller: _controller,
+                    tabs: [
+                      Tab(
+                        iconMargin: EdgeInsets.zero,
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: const [
+                              Icon(
+                                Icons.replay_circle_filled_rounded,
+                                // size: 14,
+                              ),
+                              SizedBox(
+                                width: 2,
+                              ),
+                              Text(
+                                'Tủ sách',
+                                style: TextStyle(fontSize: 11),
+                              )
+                            ]),
+                      ),
+                      Tab(
+                        iconMargin: EdgeInsets.zero,
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Icon(
+                                Icons.bookmark,
+                                // size: 14,
+                              ),
+                              SizedBox(
+                                width: 2,
+                              ),
+                              Text(
+                                'Truyện tranh',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: 11),
+                              )
+                            ]),
+                      ),
+                      Tab(
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Icon(
+                                Icons.download,
+                                // size: 14,
+                              ),
+                              SizedBox(
+                                width: 2,
+                              ),
+                              Text(
+                                'Cửa hàng',
+                                style: TextStyle(fontSize: 11),
+                              )
+                            ]),
+                      ),
+                      Tab(
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Icon(
+                                Icons.download,
+                                // size: 14,
+                              ),
+                              SizedBox(
+                                width: 2,
+                              ),
+                              Text(
+                                'Thế giới',
+                                style: TextStyle(fontSize: 11),
+                              )
+                            ]),
+                      ),
+                      Tab(
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Icon(
+                                Icons.download,
+                                // size: 14,
+                              ),
+                              SizedBox(
+                                width: 2,
+                              ),
+                              Text(
+                                'Tôi',
+                                style: TextStyle(fontSize: 11),
+                              )
+                            ]),
+                      )
+                    ]),
+              ),
+            ],
+          );
+        }),
       ),
     );
   }

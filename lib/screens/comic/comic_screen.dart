@@ -1,7 +1,10 @@
 import 'package:carousel_indicator/carousel_indicator.dart';
+import 'package:clon_app/blocs/manga_bloc.dart';
+import 'package:clon_app/events/manga_event.dart';
 import 'package:clon_app/widgets/comic_item.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../models/argument/sort_comic_argument.dart';
@@ -19,22 +22,27 @@ class _ComicScreen extends State<ComicScreen> {
     Image.network(
       'https://burst.shopifycdn.com/photos/man-wearing-loose-clothing-walks-through-jungle.jpg?width=925&format=pjpg&exif=1&iptc=1',
       fit: BoxFit.cover,
+      scale: 1,
     ),
     Image.network(
       'https://burst.shopifycdn.com/photos/man-wearing-loose-clothing-walks-through-jungle.jpg?width=925&format=pjpg&exif=1&iptc=1',
       fit: BoxFit.cover,
+      scale: 1,
     ),
     Image.network(
       'https://burst.shopifycdn.com/photos/man-wearing-loose-clothing-walks-through-jungle.jpg?width=925&format=pjpg&exif=1&iptc=1',
       fit: BoxFit.cover,
+      scale: 1,
     ),
     Image.network(
       'https://burst.shopifycdn.com/photos/man-wearing-loose-clothing-walks-through-jungle.jpg?width=925&format=pjpg&exif=1&iptc=1',
       fit: BoxFit.cover,
+      scale: 1,
     ),
     Image.network(
       'https://burst.shopifycdn.com/photos/man-wearing-loose-clothing-walks-through-jungle.jpg?width=925&format=pjpg&exif=1&iptc=1',
       fit: BoxFit.cover,
+      scale: 1,
     ),
   ];
   @override
@@ -70,7 +78,7 @@ class _ComicScreen extends State<ComicScreen> {
                 ),
                 const Spacer(),
                 InkWell(
-                  onTap: () {},
+                  onTap: () => context.read<MangaBloc>().add(MangaLoading()),
                   child: const Icon(
                     Icons.search_rounded,
                     color: Colors.white,
@@ -192,10 +200,12 @@ class _ComicScreen extends State<ComicScreen> {
                     ),
                     Expanded(
                       child: InkWell(
-                        onTap: () => Navigator.of(context).pushNamed(
-                            "/sort_comic",
-                            arguments: SortComicArguments(
-                                status: "Tất cả", orderby: "Lượt xem")),
+                        // onTap: () => Navigator.of(context).pushNamed(
+                        //     "/sort_comic",
+                        //     arguments: SortComicArguments(
+                        //         status: "Tất cả", orderby: "Lượt xem")),
+                        onTap: () =>
+                            context.read<MangaBloc>().add(MangaLoading()),
                         child: Container(
                           padding: const EdgeInsets.fromLTRB(0, 18, 0, 18),
                           child: Column(
