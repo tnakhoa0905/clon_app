@@ -1,10 +1,12 @@
+import 'package:clon_app/models/manga.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 // ignore: must_be_immutable
 class ReadComicScreen extends StatefulWidget {
-  ReadComicScreen({super.key, required this.chapter});
-  int chapter;
+  ReadComicScreen({super.key, required this.detailChapter});
+
+  List<Chapter> detailChapter;
   @override
   State<ReadComicScreen> createState() => _ReadComicScreenState();
 }
@@ -12,11 +14,12 @@ class ReadComicScreen extends StatefulWidget {
 class _ReadComicScreenState extends State<ReadComicScreen> {
   bool _showAppBar = true;
   bool _showBottomNavigationBar = true;
+  int chapter = 1;
   String _title = '';
   @override
   void initState() {
     // TODO: implement initState
-    _title = "Chapter ${widget.chapter}";
+    _title = "Chapter $chapter";
     // SchedulerBinding.instance.addPostFrameCallback((_) {
     //   //yourcode
     //   showAlert(context);
@@ -41,7 +44,7 @@ class _ReadComicScreenState extends State<ReadComicScreen> {
             () {
               Navigator.of(context, rootNavigator: true).pop();
               setState(() {
-                _title = "Chapter ${widget.chapter}";
+                _title = "Chapter ${chapter}";
               });
             },
           );
@@ -88,20 +91,20 @@ class _ReadComicScreenState extends State<ReadComicScreen> {
               child:
                   Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
                 GestureDetector(
-                  onTap: widget.chapter == 1
+                  onTap: chapter == 1
                       ? null
                       : () {
                           setState(() {
                             _title = "Đang tải...";
                           });
-                          widget.chapter -= 1;
+                          chapter -= 1;
 
                           showAlert(context);
                         },
                   child: Icon(
                     Icons.arrow_back,
                     size: 40,
-                    color: widget.chapter == 1 ? Colors.grey : Colors.white,
+                    color: chapter == 1 ? Colors.grey : Colors.white,
                   ),
                 ),
                 const Spacer(),
@@ -133,18 +136,22 @@ class _ReadComicScreenState extends State<ReadComicScreen> {
                 ),
                 const Spacer(),
                 GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      _title = "Đang tải...";
-                    });
-                    widget.chapter += 1;
+                  onTap: chapter == widget.detailChapter.length
+                      ? null
+                      : () {
+                          setState(() {
+                            _title = "Đang tải...";
+                          });
+                          chapter += 1;
 
-                    showAlert(context);
-                  },
-                  child: const Icon(
+                          showAlert(context);
+                        },
+                  child: Icon(
                     Icons.arrow_forward,
                     size: 40,
-                    color: Colors.white,
+                    color: chapter == widget.detailChapter.length
+                        ? Colors.grey
+                        : Colors.white,
                   ),
                 )
               ]),
@@ -321,10 +328,11 @@ class _ReadComicScreenState extends State<ReadComicScreen> {
                 fit: FlexFit.loose,
                 child: ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: 6,
+                    itemCount:
+                        widget.detailChapter[chapter - 1].chapImages.length,
                     shrinkWrap: true,
-                    itemBuilder: (context, index) => Image.asset(
-                          'assets/images/image3.png',
+                    itemBuilder: (context, index) => Image.network(
+                          widget.detailChapter[chapter - 1].chapImages[index],
                           fit: BoxFit.cover,
                         )),
               ),

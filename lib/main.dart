@@ -1,4 +1,6 @@
+import 'package:clon_app/blocs/events/manga_event.dart';
 import 'package:clon_app/blocs/manga_bloc.dart';
+import 'package:clon_app/models/manga.dart';
 import 'package:clon_app/routes/app_routes.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -25,8 +27,12 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => MangaBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<MangaBloc>(
+          create: (BuildContext context) => MangaBloc(),
+        ),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(scaffoldBackgroundColor: Colors.white),

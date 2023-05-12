@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../models/manga.dart';
+
 class ComicItem extends StatelessWidget {
   bool paddingIS;
-
-  ComicItem({super.key, required this.paddingIS});
+  Manga manga;
+  ComicItem({super.key, required this.paddingIS, required this.manga});
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -28,9 +30,7 @@ class ComicItem extends StatelessWidget {
           );
         }
 
-        Navigator.of(context).pushNamed(
-          '/detail_comic',
-        );
+        Navigator.of(context).pushNamed('/detail_comic', arguments: manga);
       },
       child: Container(
         padding: paddingIS == true
@@ -43,19 +43,18 @@ class ComicItem extends StatelessWidget {
             Flexible(
               flex: 6,
               child: Container(
-                color: Colors.amber,
-                width: double.infinity,
-                child: const Image(
-                  fit: BoxFit.fitWidth,
-                  image: AssetImage('assets/images/image3.png'),
-                ),
-              ),
+                  color: Colors.amber,
+                  width: double.infinity,
+                  child: Image.network(
+                    manga.imageUrl,
+                    fit: BoxFit.fitWidth,
+                  )),
             ),
             const SizedBox(
               height: 8,
             ),
-            const Flexible(
-              child: Text('Ta là khoa đẹp trai hih',
+            Flexible(
+              child: Text(manga.title,
                   style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 14,

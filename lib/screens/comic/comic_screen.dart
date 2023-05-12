@@ -1,6 +1,6 @@
 import 'package:carousel_indicator/carousel_indicator.dart';
 import 'package:clon_app/blocs/manga_bloc.dart';
-import 'package:clon_app/events/manga_event.dart';
+import 'package:clon_app/blocs/events/manga_event.dart';
 import 'package:clon_app/widgets/comic_item.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../models/argument/sort_comic_argument.dart';
+import '../../models/manga.dart';
 
 class ComicScreen extends StatefulWidget {
   const ComicScreen({super.key});
@@ -17,6 +18,7 @@ class ComicScreen extends StatefulWidget {
 }
 
 class _ComicScreen extends State<ComicScreen> {
+  final _mangaBloc = MangaBloc();
   var activeIndex = 0;
   List<Widget> image = [
     Image.network(
@@ -49,6 +51,7 @@ class _ComicScreen extends State<ComicScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    _mangaBloc.add(MangaLoading());
   }
 
   @override
@@ -78,7 +81,7 @@ class _ComicScreen extends State<ComicScreen> {
                 ),
                 const Spacer(),
                 InkWell(
-                  onTap: () => context.read<MangaBloc>().add(MangaLoading()),
+                  onTap: () {},
                   child: const Icon(
                     Icons.search_rounded,
                     color: Colors.white,
@@ -304,18 +307,26 @@ class _ComicScreen extends State<ComicScreen> {
   }
 
   Widget buildList() {
-    return GridView.builder(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: 9,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          childAspectRatio: 0.41,
-          crossAxisCount: 3,
-          mainAxisSpacing: 4,
-          crossAxisSpacing: 4),
-      itemBuilder: (context, index) => ComicItem(
-        paddingIS: false,
-      ),
-    );
+    return BlocBuilder<MangaBloc, List<Manga>>(
+        bloc: _mangaBloc,
+        builder: (context, state) {
+          if (state.isEmpty) {
+            return const CircularProgressIndicator();
+          }
+          return GridView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: 9,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio: 0.41,
+                crossAxisCount: 3,
+                mainAxisSpacing: 4,
+                crossAxisSpacing: 4),
+            itemBuilder: (context, index) => ComicItem(
+              paddingIS: false,
+              manga: state[index],
+            ),
+          );
+        });
   }
 }

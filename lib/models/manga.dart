@@ -22,8 +22,8 @@ class Manga {
   String toRawJson() => json.encode(toJson());
 
   factory Manga.fromJson(Map<String, dynamic> json) => Manga(
-        chapters: List<Chapter>.from(
-            json["chapters"].map((x) => Chapter.fromJson(x))),
+        chapters: List<Chapter>.from(json["chapters"]
+            .map((x) => Chapter.fromJson(Map<String, dynamic>.from(x)))),
         date: json["date"],
         imageUrl: json["image_url"],
         title: json["title"],

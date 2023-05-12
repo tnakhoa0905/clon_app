@@ -330,16 +330,18 @@ class _SortComicScreenState extends State<SortComicScreen> {
                       child: const Text('Lọc mới')),
                 ],
               ),
-              GridView.builder(
-                  itemCount: 30,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      childAspectRatio: 0.41,
-                      crossAxisCount: 3,
-                      mainAxisSpacing: 4,
-                      crossAxisSpacing: 4),
-                  itemBuilder: (context, index) => ComicItem(paddingIS: false))
+              // GridView.builder(
+              //     itemCount: 30,
+              //     shrinkWrap: true,
+              //     physics: const NeverScrollableScrollPhysics(),
+              //     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              //         childAspectRatio: 0.41,
+              //         crossAxisCount: 3,
+              //         mainAxisSpacing: 4,
+              //         crossAxisSpacing: 4),
+              //     itemBuilder: (context, index) => ComicItem(
+              //           paddingIS: false,
+              //         ))
             ],
           ),
         ),

@@ -3,10 +3,12 @@ import 'package:clon_app/screens/comic/detail_comic/introduce_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
+import '../../models/manga.dart';
 import 'detail_comic/reviews_tab.dart';
 
 class DetailComicScreen extends StatefulWidget {
-  const DetailComicScreen({super.key});
+  Manga manga;
+  DetailComicScreen({super.key, required this.manga});
 
   @override
   State<DetailComicScreen> createState() => _DetailComicScreenState();
@@ -118,8 +120,8 @@ class _DetailComicScreenState extends State<DetailComicScreen>
                       SizedBox(
                           width: MediaQuery.of(context).size.width * 0.3,
                           height: MediaQuery.of(context).size.width * 2 / 5,
-                          child: Image.asset(
-                            'assets/images/image3.png',
+                          child: Image.network(
+                            widget.manga.imageUrl,
                             fit: BoxFit.cover,
                           )),
                       Expanded(
@@ -432,7 +434,8 @@ class _DetailComicScreenState extends State<DetailComicScreen>
             flex: 5,
             child: InkWell(
               onTap: () {
-                Navigator.of(context).pushNamed("/readComic", arguments: 1);
+                Navigator.of(context)
+                    .pushNamed("/readComic", arguments: widget.manga.chapters);
               },
               child: Container(
                 padding: const EdgeInsets.all(4),

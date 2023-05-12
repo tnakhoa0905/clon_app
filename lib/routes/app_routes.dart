@@ -1,3 +1,4 @@
+import 'package:clon_app/models/manga.dart';
 import 'package:clon_app/screens/comic/detail_comic_screen.dart';
 import 'package:clon_app/screens/comic/sort_comic_screen.dart';
 import 'package:clon_app/screens/home_screen.dart';
@@ -33,8 +34,12 @@ class AppRoute {
       case homePage:
         return MaterialPageRoute(builder: (context) => const HomeScreen());
       case detaiComic:
+        Manga manga = settings.arguments as Manga;
+        print(manga);
         return MaterialPageRoute(
-            builder: (context) => const DetailComicScreen());
+            builder: (context) => DetailComicScreen(
+                  manga: manga,
+                ));
       case changeProlife:
         return MaterialPageRoute(
             builder: (context) => const ChangeProlifeScreen());
@@ -69,10 +74,12 @@ class AppRoute {
         return MaterialPageRoute(
             builder: ((context) => const TuiCanKhonScreen()));
       case readComic:
-        var _chapter = settings.arguments as int;
+        print(settings.arguments);
+        var detailChapter = settings.arguments as List<Chapter>;
+        print(detailChapter);
         return MaterialPageRoute(
             builder: (context) => ReadComicScreen(
-                  chapter: _chapter,
+                  detailChapter: detailChapter,
                 ));
       default:
         throw FormatException('Route khong ton tai');
